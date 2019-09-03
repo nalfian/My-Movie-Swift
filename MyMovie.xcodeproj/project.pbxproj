@@ -12,6 +12,7 @@
 		4C2C1ED22316551D00ABEDCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C2C1ED02316551D00ABEDCC /* Main.storyboard */; };
 		4C2C1ED42316551E00ABEDCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C2C1ED32316551E00ABEDCC /* Assets.xcassets */; };
 		4C2C1ED72316551E00ABEDCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C2C1ED52316551E00ABEDCC /* LaunchScreen.storyboard */; };
+		4CE1BD20231EB25D00FB43E8 /* DetailMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE1BD1F231EB25D00FB43E8 /* DetailMovieViewController.swift */; };
 		4CFC8826231EA4A4008AA6DA /* UpcomingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CFC8825231EA4A4008AA6DA /* UpcomingViewController.swift */; };
 		4CFC8829231EA691008AA6DA /* FavoritViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CFC8828231EA691008AA6DA /* FavoritViewController.swift */; };
 /* End PBXBuildFile section */
@@ -24,6 +25,7 @@
 		4C2C1ED32316551E00ABEDCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C2C1ED62316551E00ABEDCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C2C1ED82316551E00ABEDCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4CE1BD1F231EB25D00FB43E8 /* DetailMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovieViewController.swift; sourceTree = "<group>"; };
 		4CFC8825231EA4A4008AA6DA /* UpcomingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingViewController.swift; sourceTree = "<group>"; };
 		4CFC8828231EA691008AA6DA /* FavoritViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,6 +74,7 @@
 				4C2C1ECE2316551D00ABEDCC /* NowPlayingViewController.swift */,
 				4CFC8828231EA691008AA6DA /* FavoritViewController.swift */,
 				4CFC8825231EA4A4008AA6DA /* UpcomingViewController.swift */,
+				4CE1BD1F231EB25D00FB43E8 /* DetailMovieViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 				4CFC8829231EA691008AA6DA /* FavoritViewController.swift in Sources */,
 				4C2C1ECF2316551D00ABEDCC /* NowPlayingViewController.swift in Sources */,
 				4CFC8826231EA4A4008AA6DA /* UpcomingViewController.swift in Sources */,
+				4CE1BD20231EB25D00FB43E8 /* DetailMovieViewController.swift in Sources */,
 				4C2C1ECD2316551D00ABEDCC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
