@@ -39,6 +39,78 @@ class MovieClient{
         }
     }
     
+    class func taskForGETRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) -> URLSessionDataTask {
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+                return
+            }
+            let decoder = JSONDecoder()
+            do {
+                let responseObject = try decoder.decode(ResponseType.self, from: data)
+                DispatchQueue.main.async {
+                    completion(responseObject, nil)
+                }
+            } catch {
+                do {
+                    let errorResponse = try decoder.decode(FailureResponse.self, from: data) as Error
+                    DispatchQueue.main.async {
+                        completion(nil, errorResponse)
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completion(nil, error)
+                    }
+                }
+            }
+        }
+        task.resume()
+        
+        return task
+    }
     
+    class func nowPlaying(completion: @escaping ([Movie], Error?) -> Void) -> URLSessionDataTask {
+        let task = taskForGETRequest(url: EndPoints.getNowPlaying.url, responseType: MovieResult.self) { response, error in
+            if let response = response {
+                completion(response.results, nil)
+            } else {
+                completion([], error)
+            }
+        }
+        return task
+    }
+    
+    class func upcoming(completion: @escaping ([Movie], Error?) -> Void) -> URLSessionDataTask {
+        let task = taskForGETRequest(url: EndPoints.getUpcoming.url, responseType: MovieResult.self) { response, error in
+            if let response = response {
+                completion(response.results, nil)
+            } else {
+                completion([], error)
+            }
+        }
+        return task
+    }
+    
+    class func search(keyword: String, completion: @escaping ([Movie], Error?) -> Void) -> URLSessionDataTask {
+        let task = taskForGETRequest(url: EndPoints.search(keyword).url, responseType: MovieResult.self) { response, error in
+            if let response = response {
+                completion(response.results, nil)
+            } else {
+                completion([], error)
+            }
+        }
+        return task
+    }
+    
+    class func downloadPosterImage(path: String, completion: @escaping (Data?, Error?) -> Void) {
+        let task = URLSession.shared.dataTask(with: EndPoints.posterImage(path).url) { data, response, error in
+            DispatchQueue.main.async {
+                completion(data, error)
+            }
+        }
+        task.resume()
+    }
     
 }
