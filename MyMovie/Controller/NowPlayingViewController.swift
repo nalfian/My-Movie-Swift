@@ -13,7 +13,7 @@ class NowPlayingViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var movies = [Movie]()
-    var task : URLSessionDataTask?
+    var task: URLSessionDataTask?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ class NowPlayingViewController: UIViewController {
     }
 }
 
-extension NowPlayingViewController: UITableViewDataSource, UITableViewDelegate{
+extension NowPlayingViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -42,7 +42,7 @@ extension NowPlayingViewController: UITableViewDataSource, UITableViewDelegate{
         
         cell.textLabel?.text = movie.title
         cell.imageView?.image = UIImage(named: "PosterPlaceholder")
-        if let posterPath = movie.posterPath{
+        if let posterPath = movie.posterPath {
             MovieClient.downloadPosterImage(path: posterPath){ data, error in
                 guard let data = data else {
                     return
@@ -52,7 +52,6 @@ extension NowPlayingViewController: UITableViewDataSource, UITableViewDelegate{
                 cell.setNeedsLayout()
             }
         }
-        
         return cell
     }
 }
