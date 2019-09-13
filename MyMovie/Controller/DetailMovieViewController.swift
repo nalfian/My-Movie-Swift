@@ -13,11 +13,14 @@ class DetailMovieViewController: UIViewController {
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UITextView!
     @IBOutlet weak var imageMovie: UIImageView!
+    @IBOutlet weak var buttonFavorit: UIBarButtonItem!
     
     var movie: Movie!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        buttonFavorit.action = #selector(favorit)
         
         labelTitle.text = movie.title
         labelDescription.text = movie.overview
@@ -32,5 +35,16 @@ class DetailMovieViewController: UIViewController {
             }
         }
     }
-
+    
+    var isFavorit = true
+    
+    @objc func favorit(){
+        if isFavorit{
+            isFavorit = false
+            self.buttonFavorit.tintColor = UIColor.gray
+        } else{
+            isFavorit = true
+            self.buttonFavorit.tintColor = UIColor.black
+        }
+    }
 }

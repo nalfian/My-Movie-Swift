@@ -87,8 +87,15 @@
                                 <items>
                                     <navigationItem title="Detail Movie" id="zT6-dO-0WX">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="eEV-it-7RB">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
                                                 <segue destination="06M-NL-n9C" kind="show" id="QPW-6s-7jp"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" image="Favorite" id="XOc-mM-TtX">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <action selector="fav:" destination="l7B-Sc-it4" id="Tbe-gu-oHx"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -127,6 +134,7 @@
                         <viewLayoutGuide key="safeArea" id="yiu-R9-lg3"/>
                     </view>
                     <connections>
+                        <outlet property="buttonFavorit" destination="XOc-mM-TtX" id="d9L-Nk-yLs"/>
                         <outlet property="imageMovie" destination="Z5n-QQ-rAD" id="VKm-Lv-GDH"/>
                         <outlet property="labelDescription" destination="gQU-Hg-Wrq" id="4fA-LL-EMg"/>
                         <outlet property="labelTitle" destination="thh-e6-57z" id="s4V-Mg-ezB"/>
@@ -252,6 +260,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="J4r-RD-etH" kind="relationship" relationship="viewControllers" id="8N0-bl-vZA"/>
