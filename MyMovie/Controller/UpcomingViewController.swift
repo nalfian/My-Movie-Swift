@@ -55,4 +55,16 @@ extension UpcomingViewController: UITableViewDataSource, UITableViewDelegate {
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        let movie = movies[indexPath.row]
+        self.performSegue(withIdentifier: "showDetail", sender: movie)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail" {
+            let detailVC = segue.destination as? DetailMovieViewController
+            detailVC?.movie = sender as? Movie
+        }
+    }
 }
