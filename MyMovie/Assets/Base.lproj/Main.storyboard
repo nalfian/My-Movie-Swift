@@ -157,7 +157,6 @@
         <!--Favorit-->
         <scene sceneID="7p2-r9-pYP">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uYg-Km-ABz" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="KgV-b2-YSE" customClass="FavoritViewController" customModule="MyMovie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jz1-Ln-tLg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -187,8 +186,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NaN-N3-pR3"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favorit" image="Favorite" id="3We-GO-Num"/>
+                    <tabBarItem key="tabBarItem" title="Favorit" image="Favorite" id="3We-GO-Num">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="7"/>
+                    </tabBarItem>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uYg-Km-ABz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-920" y="1300"/>
         </scene>

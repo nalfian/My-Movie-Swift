@@ -13,7 +13,7 @@ class DetailMovieViewController: UIViewController {
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UITextView!
     @IBOutlet weak var imageMovie: UIImageView!
-    @IBOutlet weak var buttonFavorit: UIBarButtonItem!
+    var buttonFavorit: UIBarButtonItem!
     
     var movie: Movie!
     
@@ -23,6 +23,8 @@ class DetailMovieViewController: UIViewController {
         labelTitle.text = movie.title
         labelDescription.text = movie.overview
         
+        setupNavbar()
+        
         if let posterPath = movie.posterPath {
             MovieClient.downloadPosterImage(path: posterPath) { data, error in
                 guard let data = data else {
@@ -31,6 +33,26 @@ class DetailMovieViewController: UIViewController {
                 let image = UIImage(data: data)
                 self.imageMovie.image = image
             }
+        }
+    }
+    
+    func setupNavbar() {
+        buttonFavorit = UIBarButtonItem(image: UIImage(named: "Favorite"),
+                                        style: .plain,
+                                        target: self,
+                                        action: #selector(favoritePressed))
+        navigationItem.rightBarButtonItem = buttonFavorit
+    }
+    
+    var isFavorit = true
+    
+    @objc func favoritePressed() {
+        if isFavorit{
+            isFavorit = false
+            buttonFavorit.image = UIImage(named: "star")
+        } else{
+            isFavorit = true
+            buttonFavorit.image = UIImage(named: "Favorite")
         }
     }
 }
