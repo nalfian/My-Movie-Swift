@@ -19,9 +19,7 @@ class DetailMovieViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        buttonFavorit.action = #selector(favorit)
-        
+    
         labelTitle.text = movie.title
         labelDescription.text = movie.overview
         
@@ -33,18 +31,6 @@ class DetailMovieViewController: UIViewController {
                 let image = UIImage(data: data)
                 self.imageMovie.image = image
             }
-        }
-    }
-    
-    var isFavorit = true
-    
-    @objc func favorit(){
-        if isFavorit{
-            isFavorit = false
-            self.buttonFavorit.tintColor = UIColor.gray
-        } else{
-            isFavorit = true
-            self.buttonFavorit.tintColor = UIColor.black
         }
     }
 }

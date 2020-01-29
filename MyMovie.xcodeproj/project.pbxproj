@@ -49,11 +49,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C1EF25D23322586009DB531 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4C1EF26023322938009DB531 /* db */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = db;
+			sourceTree = "<group>";
+		};
 		4C2C1EC02316551D00ABEDCC = {
 			isa = PBXGroup;
 			children = (
 				4C2C1ECB2316551D00ABEDCC /* MyMovie */,
 				4C2C1ECA2316551D00ABEDCC /* Products */,
+				4C1EF25D23322586009DB531 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,6 +105,7 @@
 		4CE9EF57231FA66C00D415C5 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				4C1EF26023322938009DB531 /* db */,
 				4CE9EF58231FA67600D415C5 /* Network */,
 				4CE9EF4F231F9BCC00D415C5 /* Model */,
 			);
