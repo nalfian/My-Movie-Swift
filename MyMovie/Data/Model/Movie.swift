@@ -24,6 +24,23 @@ struct Movie: Codable, Equatable {
     let video: Bool
     let voteAverage: Double
     
+    init(id: Int, title: String, desc: String, image: String) {
+        self.id = id
+        self.title = title
+        self.overview = desc
+        self.posterPath = image
+        self.adult = false
+        self.releaseDate = ""
+        self.genreIds = [Int]()
+        self.originalTitle = ""
+        self.originalLanguage = ""
+        self.backdropPath = ""
+        self.popularity = 0
+        self.voteCount = 0
+        self.video = false
+        self.voteAverage = 0
+    }
+    
     var releaseYear: String {
         return String(releaseDate.prefix(4))
     }

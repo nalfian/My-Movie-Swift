@@ -14,6 +14,7 @@ class DetailMovieViewController: UIViewController {
     @IBOutlet weak var labelDescription: UITextView!
     @IBOutlet weak var imageMovie: UIImageView!
     var buttonFavorit: UIBarButtonItem!
+    var db = MovieDB()
     
     var movie: Movie!
     
@@ -37,22 +38,25 @@ class DetailMovieViewController: UIViewController {
     }
     
     func setupNavbar() {
-        buttonFavorit = UIBarButtonItem(image: UIImage(named: "Favorite"),
+        buttonFavorit = UIBarButtonItem(image: UIImage(named: "Star"),
                                         style: .plain,
                                         target: self,
                                         action: #selector(favoritePressed))
         navigationItem.rightBarButtonItem = buttonFavorit
+        if db.isFavorite(id: movie.id){
+            buttonFavorit.image = UIImage(named: "Favorite")
+        } else{
+            buttonFavorit.image = UIImage(named: "Star")
+        }
     }
     
-    var isFavorit = true
-    
     @objc func favoritePressed() {
-        if isFavorit{
-            isFavorit = false
-            buttonFavorit.image = UIImage(named: "star")
-        } else{
-            isFavorit = true
+         if !db.isFavorite(id: movie.id){
             buttonFavorit.image = UIImage(named: "Favorite")
+            db.insert(movie: movie)
+        } else{
+            buttonFavorit.image = UIImage(named: "Star")
+            db.delete(id: movie.id)
         }
     }
 }
