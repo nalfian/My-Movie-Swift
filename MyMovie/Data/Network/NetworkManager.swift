@@ -64,5 +64,15 @@ class NetworkManager: Networkable {
         }
     }
     
+    func downloadImage(path: String, completion: @escaping (Data?, Error?) -> ()) {
+        provider.request(.downloadImage(path)) { (response) in
+            switch response.result {
+            case .failure(let error):
+                completion(nil, error)
+            case .success(let value):
+                completion(value.data, nil)
+            }
+        }
+     }
     
 }

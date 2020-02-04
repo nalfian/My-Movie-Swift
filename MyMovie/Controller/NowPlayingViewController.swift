@@ -55,7 +55,16 @@ extension NowPlayingViewController: UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.text = movie.title
         cell.imageView?.image = UIImage(named: "PosterPlaceholder")
         if let posterPath = movie.posterPath {
-            MovieClient.downloadPosterImage(path: posterPath){ data, error in
+//            MovieClient.downloadPosterImage(path: posterPath){ data, error in
+//                guard let data = data else {
+//                    return
+//                }
+//                let image = UIImage(data: data)
+//                cell.imageView?.image = image
+//                cell.setNeedsLayout()
+//            }
+            
+            networkManager.downloadImage(path: posterPath) { (data, error) in
                 guard let data = data else {
                     return
                 }

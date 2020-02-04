@@ -13,13 +13,20 @@ enum MovieApi {
     case getNowPlaying
     case getUpcoming
     case search(String)
+    case downloadImage(String)
 }
 
 extension MovieApi: TargetType {
     
     var baseURL: URL {
         guard let url = URL(string: "https://api.themoviedb.org/3") else { fatalError("baseURL could not be configured") }
-        return url 
+        guard let urlImage = URL(string: "https://image.tmdb.org/t/p/w500") else { fatalError("baseURL could not be configured") }
+        switch self {
+        case .downloadImage:
+             return urlImage
+        default:
+            return url
+        }
     }
     
     var path: String {
@@ -30,6 +37,8 @@ extension MovieApi: TargetType {
             return "/movie/upcoming"
         case .search:
             return "/search/movie"
+        case .downloadImage(let path):
+            return path
         }
     }
     
@@ -41,7 +50,8 @@ extension MovieApi: TargetType {
             return .get
         case .search:
             return .get
-            
+        case .downloadImage:
+            return .get
         }
     }
     
@@ -50,13 +60,16 @@ extension MovieApi: TargetType {
     }
     
     var task: Task {
+        let authParams = ["api_key": MovieClient.apiKey]
         switch self {
         case .getNowPlaying:
-             return .requestParameters(parameters: ["api_key": MovieClient.apiKey], encoding: URLEncoding.queryString)
+             return .requestParameters(parameters: authParams, encoding: URLEncoding.queryString)
         case .getUpcoming:
-            return .requestParameters(parameters: ["api_key": MovieClient.apiKey], encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: authParams, encoding: URLEncoding.queryString)
         case .search(let query):
             return .requestParameters(parameters: ["query": query, "api_key": MovieClient.apiKey], encoding: URLEncoding.queryString)
+        case .downloadImage:
+            return .requestPlain
         }
     }
     
@@ -70,4 +83,5 @@ protocol Networkable {
     func getNowPlaying(completion: @escaping ([Movie], Error?) -> ())
     func getUpcoming(completion: @escaping ([Movie], Error?) -> ())
     func search(query: String, completion: @escaping ([Movie], Error?) -> ())
+    func downloadImage(path: String, completion: @escaping (Data?, Error?) -> ())
 }

@@ -15,6 +15,7 @@ class DetailMovieViewController: UIViewController {
     @IBOutlet weak var imageMovie: UIImageView!
     var buttonFavorit: UIBarButtonItem!
     var db = MovieDB()
+    let networkManager = NetworkManager()
     
     var movie: Movie!
     
@@ -27,7 +28,15 @@ class DetailMovieViewController: UIViewController {
         setupNavbar()
         
         if let posterPath = movie.posterPath {
-            MovieClient.downloadPosterImage(path: posterPath) { data, error in
+//            MovieClient.downloadPosterImage(path: posterPath) { data, error in
+//                guard let data = data else {
+//                    return
+//                }
+//                let image = UIImage(data: data)
+//                self.imageMovie.image = image
+//            }
+            
+            networkManager.downloadImage(path: posterPath) { (data, error) in
                 guard let data = data else {
                     return
                 }
