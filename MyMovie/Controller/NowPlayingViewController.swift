@@ -14,15 +14,27 @@ class NowPlayingViewController: UIViewController {
     
     var movies = [Movie]()
     var task: URLSessionDataTask?
+    let networkManager = NetworkManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        task = MovieClient.nowPlaying() { movieResult, error in
-            self.movies = movieResult
+        networkManager.getNowPlaying { (movies, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            self.movies = movies
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
+        
+//        task = MovieClient.nowPlaying() { movieResult, error in
+//            self.movies = movieResult
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
     
     }
 }

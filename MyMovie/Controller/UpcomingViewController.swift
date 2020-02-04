@@ -15,15 +15,28 @@ class UpcomingViewController: UIViewController {
     
     var movies = [Movie]()
     var task: URLSessionDataTask?
+    let networkManager = NetworkManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        task = MovieClient.upcoming() { movieResult, error in
-            self.movies = movieResult
+        
+        networkManager.getUpcoming { (movies, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            self.movies = movies
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
+        
+//        task = MovieClient.upcoming() { movieResult, error in
+//            self.movies = movieResult
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
     }
     
 }
