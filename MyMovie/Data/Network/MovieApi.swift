@@ -77,11 +77,3 @@ extension MovieApi: TargetType {
        return ["Content-type": "application/json; charset=UTF-8"]
     }
 }
-
-protocol Networkable {
-    var provider: MoyaProvider<MovieApi> { get }
-    func getNowPlaying(completion: @escaping ([Movie], Error?) -> ())
-    func getUpcoming(completion: @escaping ([Movie], Error?) -> ())
-    func search(query: String, completion: @escaping ([Movie], Error?) -> ())
-    func downloadImage(path: String, completion: @escaping (Data?, Error?) -> ())
-}

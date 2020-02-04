@@ -14,11 +14,12 @@ class NowPlayingViewController: UIViewController {
     
     var movies = [Movie]()
     var task: URLSessionDataTask?
-    let networkManager = NetworkManager()
+    let networkManager = MovieMoya()
+    let apiRequest = MovieAlamofire()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        networkManager.getNowPlaying { (movies, error) in
+        apiRequest.getNowPlaying { (movies, error) in
             if let error = error {
                 print(error)
                 return
@@ -28,6 +29,17 @@ class NowPlayingViewController: UIViewController {
                 self.tableView.reloadData()
             }
         }
+        
+//        networkManager.getNowPlaying { (movies, error) in
+//            if let error = error {
+//                print(error)
+//                return
+//            }
+//            self.movies = movies
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
         
 //        task = MovieClient.nowPlaying() { movieResult, error in
 //            self.movies = movieResult
@@ -63,8 +75,8 @@ extension NowPlayingViewController: UITableViewDataSource, UITableViewDelegate {
 //                cell.imageView?.image = image
 //                cell.setNeedsLayout()
 //            }
-            
-            networkManager.downloadImage(path: posterPath) { (data, error) in
+         
+            apiRequest.downloadImage(path: posterPath) { (data, error) in
                 guard let data = data else {
                     return
                 }
@@ -72,6 +84,15 @@ extension NowPlayingViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.imageView?.image = image
                 cell.setNeedsLayout()
             }
+            
+//            networkManager.downloadImage(path: posterPath) { (data, error) in
+//                guard let data = data else {
+//                    return
+//                }
+//                let image = UIImage(data: data)
+//                cell.imageView?.image = image
+//                cell.setNeedsLayout()
+//            }
         }
         return cell
     }

@@ -15,12 +15,13 @@ class UpcomingViewController: UIViewController {
     
     var movies = [Movie]()
     var task: URLSessionDataTask?
-    let networkManager = NetworkManager()
+    let networkManager = MovieMoya()
+    let apiRequest = MovieAlamofire()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        networkManager.getUpcoming { (movies, error) in
+        apiRequest.getUpcoming { (movies, error) in
             if let error = error {
                 print(error)
                 return
@@ -30,6 +31,17 @@ class UpcomingViewController: UIViewController {
                 self.tableView.reloadData()
             }
         }
+        
+//        networkManager.getUpcoming { (movies, error) in
+//            if let error = error {
+//                print(error)
+//                return
+//            }
+//            self.movies = movies
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
         
 //        task = MovieClient.upcoming() { movieResult, error in
 //            self.movies = movieResult
@@ -66,7 +78,7 @@ extension UpcomingViewController: UITableViewDataSource, UITableViewDelegate {
 //                cell.setNeedsLayout()
 //            }
             
-            networkManager.downloadImage(path: posterPath) { (data, error) in
+            apiRequest.downloadImage(path: posterPath) { (data, error) in
                 guard let data = data else {
                     return
                 }
@@ -74,6 +86,15 @@ extension UpcomingViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.imageView?.image = image
                 cell.setNeedsLayout()
             }
+            
+//            networkManager.downloadImage(path: posterPath) { (data, error) in
+//                guard let data = data else {
+//                    return
+//                }
+//                let image = UIImage(data: data)
+//                cell.imageView?.image = image
+//                cell.setNeedsLayout()
+//            }
         }
         return cell
     }

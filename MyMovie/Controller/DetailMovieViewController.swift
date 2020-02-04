@@ -15,7 +15,8 @@ class DetailMovieViewController: UIViewController {
     @IBOutlet weak var imageMovie: UIImageView!
     var buttonFavorit: UIBarButtonItem!
     var db = MovieDB()
-    let networkManager = NetworkManager()
+    let networkManager = MovieMoya()
+    let apiRequest = MovieAlamofire()
     
     var movie: Movie!
     
@@ -36,13 +37,21 @@ class DetailMovieViewController: UIViewController {
 //                self.imageMovie.image = image
 //            }
             
-            networkManager.downloadImage(path: posterPath) { (data, error) in
+            apiRequest.downloadImage(path: posterPath) { (data, error) in
                 guard let data = data else {
                     return
                 }
                 let image = UIImage(data: data)
                 self.imageMovie.image = image
             }
+            
+//            networkManager.downloadImage(path: posterPath) { (data, error) in
+//                guard let data = data else {
+//                    return
+//                }
+//                let image = UIImage(data: data)
+//                self.imageMovie.image = image
+//            }
         }
     }
     

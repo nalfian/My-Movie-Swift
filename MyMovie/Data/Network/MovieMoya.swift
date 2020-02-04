@@ -9,7 +9,7 @@
 import Foundation
 import Moya
 
-class NetworkManager: Networkable {
+class MovieMoya {
     
     var provider = MoyaProvider<MovieApi>(plugins: [NetworkLoggerPlugin(verbose: true)])
     

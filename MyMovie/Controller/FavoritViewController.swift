@@ -13,7 +13,8 @@ class FavoritViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var db = MovieDB()
     var movies = [Movie]()
-    let networkManager = NetworkManager()
+    let networkManager = MovieMoya()
+    let apiRequest = MovieAlamofire()
     
     override func viewWillAppear(_ animated: Bool) {
         self.movies = db.reads()
@@ -48,7 +49,7 @@ extension FavoritViewController: UITableViewDataSource, UITableViewDelegate {
 //                cell.setNeedsLayout()
 //            }
             
-            networkManager.downloadImage(path: posterPath) { (data, error) in
+            apiRequest.downloadImage(path: posterPath) { (data, error) in
                 guard let data = data else {
                     return
                 }
@@ -56,6 +57,15 @@ extension FavoritViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.imageView?.image = image
                 cell.setNeedsLayout()
             }
+            
+//            networkManager.downloadImage(path: posterPath) { (data, error) in
+//                guard let data = data else {
+//                    return
+//                }
+//                let image = UIImage(data: data)
+//                cell.imageView?.image = image
+//                cell.setNeedsLayout()
+//            }
         }
         return cell
     }
